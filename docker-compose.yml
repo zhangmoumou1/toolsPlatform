@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  fastapi_app:
+    build: .
+    env_file: conf/pro.env
+    depends_on:
+      - mysql_base
+      - mysql_v5
+      - mysql_v1
+      - redis
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${SERVER_PORT}"]
+
+  mysql_base:
+    image: mysql:8.0
+    restart: always
+    env_file: conf/pro.env
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_PWD}"
+      MYSQL_DATABASE: "${DBNAME}"
+    volumes:
+      - mysql_base_data:/var/lib/mysql
+
+  mysql_v5:
+    image: mysql:8.0
+    restart: always
+    env_file: conf/pro.env
+    ports:
+      - "${MYSQL_PORT_V5}:3307"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_PWD_V5}"
+      MYSQL_DATABASE: "qms"
+    volumes:
+      - mysql_v5_data:/var/lib/mysql
+
+  mysql_v1:
+    image: mysql:8.0
+    restart: always
+    env_file: conf/pro.env
+    ports:
+      - "${MYSQL_PORT_V1}:3308"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_PWD_V1}"
+      MYSQL_DATABASE: "qms"
+    volumes:
+      - mysql_v1_data:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    restart: always
+    env_file: conf/pro.env
+    ports:
+      - "${REDIS_PORT}:6379"
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+
+volumes:
+  mysql_base_data:
+  mysql_v5_data:
+  mysql_v1_data:
