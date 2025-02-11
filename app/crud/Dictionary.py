@@ -1,11 +1,7 @@
-import datetime
-import calendar
-import enum
-import json
 import logging
 from typing import List
 from sqlalchemy import select, desc, orm
-from app.crud import ModelWrapper, Mapper
+from app.crud import Mapper
 from app.models import async_session
 from app.models.dictionary_model import DictionaryModel
 from app.schema.dictionary import DictionaryForm
@@ -14,8 +10,8 @@ logger = init_logging()
 
 class Dictionary(Mapper):
 
-    @staticmethod
-    async def insert_dictionary(data: DictionaryForm):
+    @classmethod
+    async def insert_dictionary(cls, data: DictionaryForm):
         try:
             async with async_session() as session:
                 async with session.begin():
@@ -31,11 +27,11 @@ class Dictionary(Mapper):
                         session.add(DictionaryModel(user=data.user, dict_code=data.dict_code, dict_name=data.dict_name,
                                                     enum_id=enums.enum_id, enum_name=enums.enum_name))
         except Exception as e:
-            logger.error(f"新增字典枚举失败, {e}")
+            cls.__log__.error(f"新增字典枚举失败, {e}")
             raise Exception(f"新增字典枚举失败, {e}")
 
-    @staticmethod
-    async def dictionary_list(dict_code: int):
+    @classmethod
+    async def dictionary_list(cls, dict_code: int):
         try:
             search = [DictionaryModel.deleted_at == 0]
             async with async_session() as session:
@@ -46,13 +42,14 @@ class Dictionary(Mapper):
                 )
                 total = query.raw.rowcount
                 result = query.all()
+                cls.__log__.info(f"查询字典枚举成功, {str(result)}")
                 return result, total
         except Exception as e:
-            logger.error(f"查询字典枚举失败, {e}")
+            cls.__log__.error(f"查询字典枚举失败, {str(e)}")
             raise Exception(f"查询字典枚举失败, {e}")
 
-    @staticmethod
-    async def delete_dictionary(data: DictionaryForm):
+    @classmethod
+    async def delete_dictionary(cls, data: DictionaryForm):
         try:
             search = [DictionaryModel.deleted_at == 0]
             async with async_session() as session:
@@ -66,7 +63,8 @@ class Dictionary(Mapper):
                     logging.error(results)
                     if results == []:
                         raise Exception("字典不存在")
-                    [setattr(result, 'deleted_at', 1) or setattr(result, 'update_user', data.user) for result in results]
+                    [setattr(result, 'deleted_at', 1) or setattr(result, 'update_user', data.user) for result in
+                     results]
         except Exception as e:
-            logger.error(f"查询字典枚举失败, {e}")
-            raise Exception(f"查询字典枚举失败, {e}")
+            cls.__log__.error(f"删除字典枚举失败, {str(e)}")
+            raise Exception(f"删除字典枚举失败, {e}")

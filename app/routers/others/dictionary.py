@@ -3,6 +3,8 @@ from app.crud.Dictionary import Dictionary
 from app.crud.ToolsInfo import ToolsInfo
 from app.handler.fatcory import QmsResponse
 from fastapi import APIRouter
+from app import init_logging
+logger = init_logging()
 
 router = APIRouter(prefix="/qms/others")
 
