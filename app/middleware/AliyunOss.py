@@ -8,9 +8,9 @@ logger = init_logging()
 
 
 class OssFile(object):
-    _base_path = "qms"
+    _base_path = None
 
-    async def create_file(self, user, file_name: str, content, base_path: str = None) -> (str, int):
+    async def create_file(self, file_name: str, content, base_path: str = None) -> (str, int):
         raise NotImplementedError
 
     # async def update_file(self, filepath: str, content, base_path: str = None):
@@ -29,12 +29,13 @@ class OssFile(object):
         raise NotImplementedError
 
     def get_real_path(self, filepath, base_path=None):
-        return f"{self._base_path if base_path is None else base_path}/{filepath}"
+        return filepath
+        # return f"{self._base_path if base_path is None else base_path}/{filepath}"
 
     @staticmethod
     def get_random_filename(filename):
-        random_str = "qms"
-        return f"{time.time_ns()}_{''.join(random_str)}_{filename}"
+        base_file = "test"
+        return f"{base_file}/{time.time_ns()}_{filename}"
 
 class OssClient(object):
 
@@ -68,9 +69,9 @@ class AliyunOss(OssFile):
         self.bucket = oss2.Bucket(auth, endpoint, bucket)
 
     @awaitable
-    def create_file(self, user, file_name, content: bytes, base_path: str = None):
+    def create_file(self,file_name, content: bytes, base_path: str = None):
         # key = self.get_real_path(filepath, base_path)
-        file_name = OssFile.get_random_filename(user + file_name)
+        file_name = OssFile.get_random_filename(file_name)
         response = self.bucket.put_object(file_name, content)
         url = self.bucket.sign_url('GET', file_name, 60*60*24)
         return url
@@ -97,4 +98,4 @@ class AliyunOss(OssFile):
         if not self.bucket.object_exists(key):
             raise Exception(f"oss文件: {key}不存在")
         file_object = self.bucket.get_object(key)
-        return file_object.resp.response.content
+        return file_object.read()

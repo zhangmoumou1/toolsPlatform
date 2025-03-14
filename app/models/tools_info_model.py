@@ -1,5 +1,5 @@
 from app.models.basic import QmsBase
-from sqlalchemy import Column, String, INT, TEXT
+from sqlalchemy import Column, String, INT, TEXT, JSON
 
 class ToolsInfoModel(QmsBase):
     title = Column(String(32), nullable=False, comment="标题")
@@ -18,4 +18,18 @@ class ToolsInfoModel(QmsBase):
         self.description = description
         self.manual = manual
         self.total = total
+        super().__init__(user, id)
+
+class FeedBackModel(QmsBase):
+    title = Column(String(32), nullable=False, comment="标题")
+    description = Column(TEXT, nullable=True, comment="描述")
+    url = Column(JSON, nullable=False, comment="文件地址")
+    __tablename__ = "feedback"
+    __tag__ = "意见反馈"
+    __table_args__ = {"comment": "意见反馈"}
+
+    def __init__(self, title, description, url, user, id=None):
+        self.title = title
+        self.description = description
+        self.url = url
         super().__init__(user, id)

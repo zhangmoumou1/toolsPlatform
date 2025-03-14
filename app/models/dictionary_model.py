@@ -6,16 +6,18 @@ class DictionaryModel(QmsBase):
     dict_name = Column(String(32), nullable=True, comment="字典名称")
     enum_id = Column(INT, nullable=False, comment="字典枚举id")
     enum_name = Column(String(32), nullable=True, comment="字典枚举名称")
+    desc = Column(String(128), nullable=True, comment="描述")
 
     __tablename__ = "dictionary"
     __tag__ = "枚举字典"
     __table_args__ = {"comment": "枚举字典"}
 
-    def __init__(self, dict_code, dict_name, enum_id, enum_name, user, id=None):
+    def __init__(self, dict_code, dict_name, enum_id, enum_name, desc, user, id=None):
         self.dict_code = dict_code
         self.dict_name = dict_name
         self.enum_id = enum_id
         self.enum_name = enum_name
+        self.desc = desc
         super().__init__(user, id)
 
 # # 定义 before_insert 事件监听器

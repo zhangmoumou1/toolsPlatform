@@ -24,7 +24,7 @@ qms = FastAPI(
         redoc_url="/redoc"
     )
 
-# pity.add_middleware(
+# qms.add_middleware(
 #     middleware.ContextMiddleware,
 #     plugins=(
 #         plugins.ForwardedForPlugin(),
@@ -190,20 +190,19 @@ def init_logging():
     logging.getLogger("uvicorn").handlers = [intercept_handler]
     # set logs output, level and format
     # logger.add(sys.stdout, level=logging.DEBUG, format=format_record, filter=make_filter('stdout'))
-    # 为pity添加一个info log文件，主要记录debug和info级别的日志
-    pity_info = os.path.join(Config.LOG_DIR, f"{Config.QMS_INFO}.log")
-    # 为pity添加一个error log文件，主要记录warning和error级别的日志
-    pity_error = os.path.join(Config.LOG_DIR, f"{Config.QMS_ERROR}.log")
-    logger.add(pity_info, enqueue=True, rotation="20 MB", level="DEBUG", filter=make_filter(Config.QMS_INFO))
+    # 为qms添加一个info log文件，主要记录debug和info级别的日志
+    qms_info = os.path.join(Config.LOG_DIR, f"{Config.QMS_INFO}.log")
+    # 为qms添加一个error log文件，主要记录warning和error级别的日志
+    qms_error = os.path.join(Config.LOG_DIR, f"{Config.QMS_ERROR}.log")
+    logger.add(qms_info, enqueue=True, rotation="20 MB", level="DEBUG", filter=make_filter(Config.QMS_INFO))
+    logger.add(qms_error, enqueue=True, rotation="10 MB", level="WARNING", filter=make_filter(Config.QMS_ERROR))
 
-    logger.add(pity_error, enqueue=True, rotation="10 MB", level="WARNING", filter=make_filter(Config.QMS_ERROR))
-
-    # 配置loguru的日志句柄，sink代表输出的目标
+    # Configuring loguru once with all handlers
     logger.configure(
         handlers=[
             {"sink": sys.stdout, "level": logging.DEBUG, "format": format_record},
-            {"sink": pity_info, "level": logging.INFO, "format": INFO_FORMAT, "filter": make_filter(Config.QMS_INFO)},
-            {"sink": pity_error, "level": logging.WARNING, "format": ERROR_FORMAT,
+            {"sink": qms_info, "level": logging.DEBUG, "format": INFO_FORMAT, "filter": make_filter(Config.QMS_INFO)},
+            {"sink": qms_error, "level": logging.WARNING, "format": ERROR_FORMAT,
              "filter": make_filter(Config.QMS_ERROR)}
         ]
     )

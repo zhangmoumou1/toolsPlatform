@@ -35,3 +35,7 @@ starlette_context
 gunicorn
 supervisor
 pyDes~=2.0.1
+pandas~=2.0.3
+openpyxl
+python-calamine
+alembic

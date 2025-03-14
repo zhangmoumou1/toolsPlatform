@@ -21,6 +21,7 @@ from app.models import Base, async_session, async_engine
 from app.models.basic import QmsRelationField, init_relation, QmsBase
 from app.utils.logger import Log
 from config import Config
+from app.models.dictionary_model import DictionaryModel
 
 Transaction = TypeVar("Transaction", bool, Callable)
 
@@ -428,23 +429,23 @@ class Mapper(object):
             raise Exception(f"删除记录失败")
 
     @classmethod
-    async def insert_log(cls, session, user, mode, now, old=None, key=None, changed=None):
-        """
-        根据relation插入日志
-        :param changed:
-        :param user:
-        :param now:
-        :param old:
-        :param session:
-        :param mode:
-        :param key:
-        :return:
-        """
-        diff, title = await cls.get_diff(session, mode, now, old, changed)
-        tag = getattr(now, Config.TABLE_TAG, '未设置')
-        diff_data = json.dumps(diff, ensure_ascii=False)
-        model = PityOperationLog(user, mode, "&".join(title), tag, diff_data, key)
-        session.add(model)
+    # async def insert_log(cls, session, user, mode, now, old=None, key=None, changed=None):
+    #     """
+    #     根据relation插入日志
+    #     :param changed:
+    #     :param user:
+    #     :param now:
+    #     :param old:
+    #     :param session:
+    #     :param mode:
+    #     :param key:
+    #     :return:
+    #     """
+    #     diff, title = await cls.get_diff(session, mode, now, old, changed)
+    #     tag = getattr(now, Config.TABLE_TAG, '未设置')
+    #     diff_data = json.dumps(diff, ensure_ascii=False)
+    #     model = QmsOperationLog(user, mode, "&".join(title), tag, diff_data, key)
+    #     session.add(model)
 
     @classmethod
     async def get_diff(cls, session, mode, now, old, changed):
@@ -628,6 +629,94 @@ def get_dao_path():
                     path_dict[f].append(py_file.split('.')[0])
             yield path_dict
 
+
+async def QueryDictionary( dict_code: int = None, enum_id: int = None):
+    """
+    查询字典枚举
+    :param dict_code:
+    :param enum_id:
+    :return:
+    """
+    try:
+        async with async_session() as session:
+            search = [DictionaryModel.deleted_at == 0]
+            if dict_code is None and enum_id is None:
+                query = await session.execute(
+                    select(DictionaryModel.dict_code, DictionaryModel.dict_name, DictionaryModel.enum_id,
+                           DictionaryModel.enum_name).where(*search)
+                )
+                result = query.all()
+                grouped_dict = defaultdict(lambda: {"dict_name": "", "enums": []})
+                for dict_code, dict_name, enum_id, enum_name in result:
+                    grouped_dict[dict_code]["dict_name"] = dict_name
+                    grouped_dict[dict_code]["enums"].append({"enum_id": enum_id, "enum_name": enum_name})
+                results = [{"dict_code": k, **v} for k, v in grouped_dict.items()]
+                return results
+            else:
+                if dict_code is not None:
+                    search.append(DictionaryModel.dict_code == dict_code)
+                if enum_id is not None:
+                    search.append(DictionaryModel.enum_id == enum_id)
+                query = await session.execute(
+                    select(DictionaryModel.enum_id, DictionaryModel.enum_name).where(*search)
+                )
+                results = query.all()
+            total = len(results)
+            # 处理单条数据的情况
+            if total == 0:
+                result = []
+            else:
+                result = [{"enum_id": item[0], "enum_name": item[1]} for item in results]
+            return result
+    except Exception as e:
+        Mapper.__log__.error(f"查询字典枚举失败, {str(e)}")
+        raise Exception(f"查询字典枚举失败: {e}")
+
+async def QueryDictionaryEnums(dict_code: int = None, enum_id: int = None):
+    """
+    查询字典枚举
+    :param dict_code:
+    :param enum_id:
+    :return:
+    """
+    try:
+        async with async_session() as session:
+            search = [DictionaryModel.deleted_at == 0]
+            if dict_code is not None:
+                search.append(DictionaryModel.dict_code == dict_code)
+            if enum_id is not None:
+                search.append(DictionaryModel.enum_id == enum_id)
+            query = await session.execute(
+                select(DictionaryModel.dict_code, DictionaryModel.dict_name, DictionaryModel.enum_id,
+                       DictionaryModel.enum_name).where(*search)
+            )
+            result = query.all()
+            grouped_dict = defaultdict(lambda: {"dict_name": "", "enums": []})
+            for dict_code, dict_name, enum_id, enum_name in result:
+                grouped_dict[dict_code]["dict_name"] = dict_name
+                grouped_dict[dict_code]["enums"].append({"enum_id": enum_id, "enum_name": enum_name})
+            results = [{"dict_code": k, **v} for k, v in grouped_dict.items()]
+            return results
+    except Exception as e:
+        Mapper.__log__.error(f"查询字典枚举失败, {str(e)}")
+        raise Exception(f"查询字典枚举失败: {e}")
+
+async def CheckDictionary(dict_code: int = None, enum_id: int = None):
+    """
+    校验传进来的字典是否存在
+    :param dict_code:
+    :param enum_id:
+    :return:
+    """
+    try:
+        enum_name = await QueryDictionary(dict_code=dict_code, enum_id=enum_id)
+        if len(enum_name) == 0:
+            raise Exception(f'字典码dict_code:{dict_code}.enum_id:{enum_id}不存在')
+        else:
+            return enum_name
+    except Exception as e:
+        Mapper.__log__.error(f"查询字典枚举失败, {str(e)}")
+        raise Exception(f"查询字典枚举失败, {e}")
 
 for path in get_dao_path():
     for file, pys in path.items():
