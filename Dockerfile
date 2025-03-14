@@ -1,5 +1,6 @@
 # 使用官方基础镜像
-FROM mirror.ccs.tencentyun.com/library/python:3.8
+# FROM mirror.ccs.tencentyun.com/library/python:3.8
+FROM ccr.ccs.tencentyun.com/zhangyancheng/python:3.8
 # 设置国内 pip 镜像源
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 # 设置工作目录
