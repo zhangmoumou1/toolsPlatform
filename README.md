@@ -98,7 +98,7 @@ http://192.168.1.61:7777/docs#/
 #### 数据迁移
 当涉及到数据库/表信息变更，使用Alembic进行数据库迁移
 
-1、初始化Alembic：如果你还没有配置Alembic，首先需要初始化它。这一步会在你的项目中创建一个alembic目录，并生成一些必要的文件（如env.py和alembic.ini.pro）
+1、初始化Alembic：如果你还没有配置Alembic，首先需要初始化它。这一步会在你的项目中创建一个alembic_pro目录，并生成一些必要的文件（如env.py和alembic.ini.pro）
 ```bash
 $  alembic init alembic_pro
 ```
