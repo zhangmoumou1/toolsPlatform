@@ -86,8 +86,9 @@ class AuditDataImport(Mapper):
                 dict_channel = aliased(DictionaryModel)
                 sql = select(AuditDataImportModel.id, AuditDataImportModel.env, dict_env.enum_name.label("env_desc"),
                             AuditDataImportModel.channel, dict_channel.enum_name.label("channel_desc"),
-                             AuditDataImportModel.files, AuditDataImportModel.is_rollback,
-                             AuditDataImportModel.create_user, AuditDataImportModel.created_at
+                             AuditDataImportModel.execution_result, AuditDataImportModel.files,
+                             AuditDataImportModel.is_rollback, AuditDataImportModel.create_user,
+                             AuditDataImportModel.created_at
                         ).outerjoin(
                             dict_env, ((dict_env.dict_code == 2025000) & (dict_env.enum_id == AuditDataImportModel.env))
                         ).outerjoin(

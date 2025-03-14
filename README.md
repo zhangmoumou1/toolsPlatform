@@ -79,7 +79,7 @@ $ docker-compose up --build
 2、jenkins部署
 后续可直接使用Jenkins部署
 
-http://192.168.xx.xx:8080/job/toolsPlatform/
+http://192.168.1.61:8080/job/toolsPlatform/
 
 ```bash
 # 若部署失败，可查看日志
@@ -88,19 +88,19 @@ $ docker-compose logs
 ```
 3、API地址
 
-https://xxxxxx/qms
+https://test.wxb.com.cn/qms
 
 4、接口文档
 
-http://192.168.xx.xx:7777/docs#/
+http://192.168.1.61:7777/docs#/
 
 
 #### 数据迁移
 当涉及到数据库/表信息变更，使用Alembic进行数据库迁移
 
-1、初始化Alembic：如果你还没有配置Alembic，首先需要初始化它。这一步会在你的项目中创建一个alembic目录，并生成一些必要的文件（如env.py和alembic.ini）
+1、初始化Alembic：如果你还没有配置Alembic，首先需要初始化它。这一步会在你的项目中创建一个alembic目录，并生成一些必要的文件（如env.py和alembic.ini.pro）
 ```bash
-$ alembic init alembic
+$  alembic init alembic_pro
 ```
 2、env.py引入所有模型
 ```bash
@@ -118,10 +118,10 @@ from app.models import tools_info_model
 
 3、生成迁移脚本
 ```bash
-$ alembic revision --autogenerate -m "变更描述"
+$ alembic --config alembic.ini.pro revision --autogenerate -m "数据迁移"
 ```
 
 4、应用迁移
 ```bash
-$ alembic upgrade head
+$ alembic --config alembic.ini.pro upgrade
 ```
