@@ -154,3 +154,9 @@ WHERE qms_audit_data.deleted_at = %s AND qms_audit_data.tool_id = %s AND qms_aud
 2025-02-20 19:03:09.654 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
 2025-02-20 19:03:09.666 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
 2025-02-20 21:47:19.388 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 110 | - 查询钩稽导入记录失败, name 'pageNum' is not defined
+2025-03-14 10:54:11.553 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 109 | - 查询钩稽导入记录失败, (pymysql.err.OperationalError) (1054, "Unknown column 'qms_audit_data.execution_result' in 'field list'")
+[SQL: SELECT qms_audit_data.id, qms_audit_data.env, dictionary_1.enum_name AS env_desc, qms_audit_data.channel, dictionary_2.enum_name AS channel_desc, qms_audit_data.execution_result, qms_audit_data.files, qms_audit_data.is_rollback, qms_audit_data.create_user, qms_audit_data.created_at 
+FROM qms_audit_data LEFT OUTER JOIN dictionary AS dictionary_1 ON dictionary_1.dict_code = %s AND dictionary_1.enum_id = qms_audit_data.env LEFT OUTER JOIN dictionary AS dictionary_2 ON dictionary_2.dict_code = %s AND dictionary_2.enum_id = qms_audit_data.channel 
+WHERE qms_audit_data.deleted_at = %s AND qms_audit_data.tool_id = %s AND qms_audit_data.create_user = %s AND qms_audit_data.env = %s ORDER BY qms_audit_data.created_at DESC]
+[parameters: (2025000, 2025002, 0, '1', '唐钰/张砚程', '1')]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
