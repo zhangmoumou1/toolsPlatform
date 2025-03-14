@@ -79,7 +79,7 @@ $ docker-compose up --build
 2、jenkins部署
 后续可直接使用Jenkins部署
 
-http://192.168.1.61:8080/job/toolsPlatform/
+http://192.168.xx.xx:8080/job/toolsPlatform/
 
 ```bash
 # 若部署失败，可查看日志
@@ -88,11 +88,11 @@ $ docker-compose logs
 ```
 3、API地址
 
-https://test.wxb.com.cn/qms
+https://xxxxxx/qms
 
 4、接口文档
 
-http://192.168.1.61:7777/docs#/
+http://192.168.xx.xx:7777/docs#/
 
 
 #### 数据迁移
