@@ -24,9 +24,9 @@ create_database()
 # 同步engine
 # engine = create_engine(Config.SQLALCHEMY_DATABASE_URI, pool_recycle=1500)
 # 异步engine
-async_engine = create_async_engine(Config.ASYNC_SQLALCHEMY_URI, pool_recycle=1500)
+async_engine = create_async_engine(Config.ASYNC_SQLALCHEMY_URI, pool_size=5, pool_recycle=1500)
 # Session = sessionmaker(engine)
-async_session = sessionmaker(async_engine, class_=AsyncSession)
+async_session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
 
 
 # 业务MySQL异步连接
@@ -35,7 +35,7 @@ async_sessions = {}
 def business_async_session(env, db_name):
     uri = get_async_ur(env, db_name)
     if uri not in async_engines:
-        async_engines[uri] = create_async_engine(uri, pool_recycle=1500)
+        async_engines[uri] = create_async_engine(uri, pool_size=5, pool_recycle=1500)
         async_sessions[uri] = sessionmaker(async_engines[uri], class_=AsyncSession, expire_on_commit=False)
     # 创建一个新的会话实例
     Session = async_sessions[uri]

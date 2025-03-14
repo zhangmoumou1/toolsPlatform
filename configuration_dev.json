@@ -1,18 +1,9 @@
 {
-  "email": {
-    "sender": "wuranxu1993@126.com",
-    "password": "PQDGGXFWKYGZYQBU",
-    "host": "smtp.126.com",
-    "to": "测试报告收件人"
-  },
-  "yapi": {
-    "token": "ff"
-  },
   "oss": {
     "oss_type": "aliyun",
-    "access_key_id": "LTAI5t6zsTDwMVh8Lr7aLqZh",
-    "access_key_secret": "mDrKJZQz5u4Ck0SE2TKpzQjr1Yd7lR",
+    "access_key_id": "mCh0ZoIuJ5bJMiIy",
+    "access_key_secret": "5Mt7iL6nLO2oTKPVd5FuOO5idftwKA",
     "endpoint": "https://oss-cn-hangzhou.aliyuncs.com",
-    "bucket": "zyc-qms"
+    "bucket": "desp-chn"
   }
 }

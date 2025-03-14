@@ -1,100 +1,127 @@
-## 凡声测试平台（后端开发）指南
+
+## 研策测试工具后端
 
 ![png](https://img.shields.io/badge/Python-3.8+-green)
-![png](https://img.shields.io/badge/React-17+-blue)
-![png](https://img.shields.io/badge/FlaskApi-green)
-
-> 平台功能正在完善迭代中.....
+![png](https://img.shields.io/badge/Python-FastApi-green)
 
 ### 🎉 技术栈
 
-- [x] 🎨 Python Flask
-- [x] 🎶 SQLAlchemy(你可以看到很多sqlalchemy的用法) 
-- [x] 🎉 Apscheduler(定时任务框架)
+- [x] 🎨 Python FastApi
+- [x] 🎶 SQLAlchemy
 - [x] 🔒 Redis
-- [x] 🏐 Gunicorn(内含uvicorn，部署服务)
-- [x] 👟 asyncio(几乎全异步写法，值得参考)
+- [x] 💎 Asyncio
+- [x] 🎃 Apscheduler
 
-### ⚽ 前端地址
-
-  [🎁 快点我](https://gitlab-dby.91duobaoyu.com/qa/testplatformWeb)
-
-## ☕ 说明
-此代码statics下已包含前端编译后的代码，运行后将直接打开平台；如需二次开发请使用前端项目，完成开发后编译将dist下文件放入本项目的statics下即可
-编译命令：`npm run build`
-
-[在线体验 🍍](https://qa-platform.91duobaoyu.com/)
-
-<details open="open">
-<summary>🌙 已有功能</summary>
-
-| 功能点            | 状态  |
-|:----------|:----|
-| http测试    | ✅   |
-| 权限系统      | ✅   |
-
-
-</details>
-
-### 🚚 即将到来
-
-| 功能点          | 敬请期待 |
-|:-------------|:-----|
-| 接口测试模块       | 🎉🎉🎉   |
-| HttpRunner支持 | 🎉🎉🎉   |
-| 数据工厂         | 🎉🎉🎉   |
-
-## ✉ 使用文档
-
-[使用文档(语雀)](https://duobaoyu.yuque.com/lq96tk/hn7lk6/ftq8tr#aByQx)
-
-### 🎉 后端二次开发
-
-1. 拉取代码
+### 🎉 部署步骤
+#### 本地部署
+1、拉取代码
 
 ```bash
-$ git clone http://gitlab-dby.91duobaoyu.com:7007/qa/testplatform.git
-$ cd testplatform
+$ git clone http://git.wxb.com.cn/AutomationTestGroup/toolsPlatform.git
 ```
 
-2. 安装依赖
+2、安装依赖
 
 ```bash
 # 可换豆瓣源或者清华源安装依赖
 $ pip install -r requirements.txt
 ```
 
-3. 安装并启动redis
+3、conf/dev.env，修改mysql和redis连接信息；config.py修改QMS_ENV为dev
 
-4. 安装并启动mysql
 
-5. 修改conf/dev.env
-
-修改其中mysql和redis连接信息（可在本地安装），redis虽然可以不开启，但是会导致`定时任务重复执行`（基于redis实现了分布式锁）。
-
-6. 启动服务
+4、启动服务
 
 ```bash
-# 开发环境运行项目
-$ python pity.py  
-# 正式环境运行项目
-$ nohup /root/software_package/Python-3.8.6/bin/python3.8 pity.py &
+$ python qms.py  
+```
+看到如下表示启动成功
+```bash
+2025-03-14 10:25:58.518 | SUCCESS  | main:<module>:21 - qms is running at dev
+2025-03-14 10:25:58.519 | SUCCESS  | main:<module>:22 - 
+
+ _____                   _         _                _ 
+|  ___|                 | |      / _ \             (_)
+| |_    __ _    ___    _| |_    / /_\ \    ___      _ 
+|  _|  / _` |  / __|  |_| |_|  | | _ | |  | '_ \   | |
+| |   | (_| |  \__ \    | |_   | |   | |  | |_) |  | |
+\_|    \__,_|  |___/     \__|  \_|   |_/  | .__/   |_|
+                                          | |       
+                                          |_|
+
+2025-03-14 10:25:58.523 | INFO     | uvicorn.server:serve:75 - Started server process [17816]
+2025-03-14 10:25:58.525 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2025-03-14 10:25:58.787 | SUCCESS  | main:init_redis:92 - redis connected success.        ✔
+2025-03-14 10:26:01.073 | SUCCESS  | main:init_scheduler:117 - ApScheduler started success.        ✔
+2025-03-14 10:26:01.078 | SUCCESS  | main:init_database:128 - database and tables created success.        ✔
+2025-03-14 10:26:01.408 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2025-03-14 10:26:01.413 | INFO     | uvicorn.server:_log_started_message:206 - Uvicorn running on http://127.0.0.1:7777 (Press CTRL+C to quit)
 ```
 
-7. 注册用户
+5、API地址
 
-打开浏览器输入: `http://localhost:7777`进入登录页。
+http://127.0.0.1:7777
 
-点击注册按钮，第一个注册的用户会成为`超级管理员`，拥有一切权限。
+6、接口文档
 
-![](https://newsystem-duobaodyu.oss-cn-hangzhou.aliyuncs.com/%E7%99%BB%E5%BD%95%E9%A1%B5%202022-11-18%2011_10_59.jpg)
+https://127.0.0.1:7777/docs#/
 
-登录后就可以开启开发之旅啦！
+#### 生产部署
+MySQL和Redis统一用test环境，mysql库名qms，redis为db5
 
-8. 接口文档
-https://127.0.0.1:7777/docs
+1、首次部署
+
+首次部署需要构建镜像
+```bash
+$ docker-compose up --build
+```
+
+2、jenkins部署
+后续可直接使用Jenkins部署
+
+http://192.168.1.61:8080/job/toolsPlatform/
+
+```bash
+# 若部署失败，可查看日志
+$ docker logs 容器ID
+$ docker-compose logs
+```
+3、API地址
+
+https://test.wxb.com.cn/qms
+
+4、接口文档
+
+http://192.168.1.61:7777/docs#/
 
 
-redis-server redis.windows.conf
-./redis-cli
-CONFIG SET requirepass 123456
+#### 数据迁移
+当涉及到数据库/表信息变更，使用Alembic进行数据库迁移
+
+1、初始化Alembic：如果你还没有配置Alembic，首先需要初始化它。这一步会在你的项目中创建一个alembic目录，并生成一些必要的文件（如env.py和alembic.ini）
+```bash
+$ alembic init alembic
+```
+2、env.py引入所有模型
+```bash
+...
+...
+# 引入你的模型
+from app.crud import Base
+target_metadata = Base.metadata
+from app.models import audit_data_model
+from app.models import dictionary_model
+from app.models import tools_info_model
+...
+...
+```
+
+3、生成迁移脚本
+```bash
+$ alembic revision --autogenerate -m "变更描述"
+```
+
+4、应用迁移
+```bash
+$ alembic upgrade head
+```

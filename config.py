@@ -33,6 +33,10 @@ class BaseConfig(BaseSettings):
     MYSQL_PORT_V1: int
     MYSQL_USER_V1: str
     MYSQL_PWD_V1: str
+    MYSQL_HOST_TEST: str
+    MYSQL_PORT_TEST: int
+    MYSQL_USER_TEST: str
+    MYSQL_PWD_TEST: str
 
 
     # WARNING: close redis can make job run multiple times at the same time
@@ -84,7 +88,7 @@ class BaseConfig(BaseSettings):
 
     SERVER_REPORT = "http://localhost:8000/#/record/report/"
 
-    OSS_URL = "http://oss.pity.fun"
+    OSS_URL = "https://desp-chn.oss-cn-hangzhou.aliyuncs.com/test"
 
     # 七牛云链接地址，如果采用七牛oss，需要自行替换
     QINIU_URL = "cdn.zhangyanc.club"
@@ -113,21 +117,28 @@ class ProConfig(BaseConfig):
     class Config:
         env_file = os.path.join(ROOT, "conf", "pro.env")
 
-    SERVER_REPORT = "https://pity.fun/#/record/report/"
+    SERVER_REPORT = "https://qms.fun/#/record/report/"
     SERVER_HOST = "127.0.0.1"
 
 
-# 获取pity环境变量
-QMS_ENV = os.environ.get("qms_env", "dev")
-# 如果pity_env存在且为prod
+# 获取qms环境变量
+QMS_ENV = os.environ.get("qms_env", "pro")
+# 如果qms_env存在且为prod
 Config = ProConfig() if QMS_ENV and QMS_ENV.lower() == "pro" else DevConfig()
 
 # init redis
-Config.REDIS_NODES = [
-    {
-        "host": Config.REDIS_HOST, "port": Config.REDIS_PORT, "db": Config.REDIS_DB, "password": Config.REDIS_PASSWORD
-    }
-]
+if Config.REDIS_PASSWORD:
+    Config.REDIS_NODES = [
+        {
+            "host": Config.REDIS_HOST, "port": Config.REDIS_PORT, "db": Config.REDIS_DB, "password": Config.REDIS_PASSWORD
+        }
+    ]
+else:
+    Config.REDIS_NODES = [
+        {
+            "host": Config.REDIS_HOST, "port": Config.REDIS_PORT, "db": Config.REDIS_DB
+        }
+    ]
 
 # init sqlalchemy (used by apscheduler)
 Config.SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://{}:{}@{}:{}/{}'.format(
@@ -139,23 +150,25 @@ Config.ASYNC_SQLALCHEMY_URI = f'mysql+aiomysql://{Config.MYSQL_USER}:{Config.MYS
 
 # # 业务MySQL异步连接信息
 def get_async_ur(env, db_name):
-    if env.lower() == 'v5':
+    if env == 'v5环境':
         ASYNC_SQLALCHEMY_URI = f'mysql+aiomysql://{Config.MYSQL_USER_V5}:{Config.MYSQL_PWD_V5}' \
                                f'@{Config.MYSQL_HOST_V5}:{Config.MYSQL_PORT_V5}/{db_name}'
-    elif env.lower() == 'v1':
+    elif env == 'v1环境':
         ASYNC_SQLALCHEMY_URI = f'mysql+aiomysql://{Config.MYSQL_USER_V1}:{Config.MYSQL_PWD_V1}' \
                                f'@{Config.MYSQL_HOST_V1}:{Config.MYSQL_PORT_V1}/{db_name}'
+    elif env == 'test环境':
+        ASYNC_SQLALCHEMY_URI = f'mysql+aiomysql://{Config.MYSQL_USER_TEST}:{Config.MYSQL_PWD_TEST}' \
+                               f'@{Config.MYSQL_HOST_TEST}:{Config.MYSQL_PORT_TEST}/{db_name}'
     return ASYNC_SQLALCHEMY_URI
 
-BANNER = """
+BANNER = f"""
 
-     $$$$$$$$\    $$$$$$$$\     $$$$$$\     $$$$$$$$\ 
-  \__$$  __|   $$  _____|   $$  __$$\    \__$$  __|
-     $$ |      $$ |         $$ /  \__|      $$ |   
-     $$ |      $$$$$\       \$$$$$$\        $$ |   
-     $$ |      $$  __|       \____$$\       $$ |   
-     $$ |      $$ |         $$\   $$ |      $$ |   
-     $$ |      $$$$$$$$\    \$$$$$$  |      $$ |   
-     \__|      \________|    \______/       \__|   
-                                           
+ _____                   _         _                _ 
+|  ___|                 | |      / _ \             (_)
+| |_    __ _    ___    _| |_    / /_\ \    ___      _ 
+|  _|  / _` |  / __|  |_| |_|  | | _ | |  | '_ \   | |
+| |   | (_| |  \__ \    | |_   | |   | |  | |_) |  | |
+\_|    \__,_|  |___/     \__|  \_|   |_/  | .__/   |_|
+                                          | |       
+                                          |_|                                                 
 """

@@ -7,14 +7,14 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import Request, WebSocket, WebSocketDisconnect, Depends
 from starlette.responses import Response
 from starlette.staticfiles import StaticFiles
-from starlette.templating import Jinja2Templates
-
 from app.routers.others import router as others_router
-
+from app.routers.base import router as base_router
+from fastapi.openapi.docs import get_swagger_ui_html
 from app import qms, init_logging
 from app.crud import create_table
 from app.middleware.RedisManager import RedisHelper
 from config import Config, QMS_ENV, BANNER
+from app.utils.scheduler import Scheduler
 
 logger = init_logging()
 
@@ -39,7 +39,7 @@ async def request_info(request: Request):
 
 # 注册路由
 qms.include_router(others_router)
-
+qms.include_router(base_router)
 
 @qms.get("/{filename}")
 async def get_site(filename):
@@ -69,6 +69,18 @@ async def get_site_static(filename):
     return Response(content, media_type=content_type)
 
 
+# 挂载静态文件路径
+qms.mount("/static", StaticFiles(directory="static"), name="static")
+
+@qms.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url=qms.openapi_url,
+        title="Custom Swagger UI",
+        swagger_js_url="/static/swagger-ui-bundle.js",
+        swagger_css_url="/static/swagger-ui.css"
+    )
+
 @qms.on_event('startup')
 async def init_redis():
     """
@@ -87,22 +99,22 @@ async def init_redis():
         raise e
 
 
-# @pity.on_event('startup')
-# def init_scheduler():
-#     """
-#     初始化定时任务
-#     :return:
-#     """
-#     # SQLAlchemyJobStore指定存储链接
-#     job_store = {
-#         'default': SQLAlchemyJobStore(url=Config.SQLALCHEMY_DATABASE_URI, engine_options={"pool_recycle": 1500},
-#                                       pickle_protocol=3)
-#     }
-#     scheduler = AsyncIOScheduler()
-#     Scheduler.init(scheduler)
-#     Scheduler.configure(jobstores=job_store)
-#     Scheduler.start()
-#     logger.bind(name=None).success("ApScheduler started success.        ✔")
+@qms.on_event('startup')
+def init_scheduler():
+    """
+    初始化定时任务
+    :return:
+    """
+    # SQLAlchemyJobStore指定存储链接
+    job_store = {
+        'default': SQLAlchemyJobStore(url=Config.SQLALCHEMY_DATABASE_URI, engine_options={"pool_recycle": 1500},
+                                      pickle_protocol=3)
+    }
+    scheduler = AsyncIOScheduler()
+    Scheduler.init(scheduler)
+    Scheduler.configure(jobstores=job_store)
+    Scheduler.start()
+    logger.bind(name=None).success("ApScheduler started success.        ✔")
 
 
 @qms.on_event('startup')
@@ -124,7 +136,7 @@ def stop_test():
     pass
 
 
-# @pity.websocket("/ws/{user_id}")
+# @qms.websocket("/ws/{user_id}")
 # async def websocket_endpoint(websocket: WebSocket, user_id: int):
 #     async def send_heartbeat():
 #         while True:
@@ -143,7 +155,7 @@ def stop_test():
 #         }
 #
 #         # 存储连接后获取消息
-#         msg_records = await PityNotificationDao.list_messages(msg_type=MessageTypeEnum.all.value, receiver=user_id,
+#         msg_records = await QmsNotificationDao.list_messages(msg_type=MessageTypeEnum.all.value, receiver=user_id,
 #                                                               msg_status=MessageStateEnum.unread.value)
 #         # 如果有未读消息, 则推送给前端对应的count
 #         if len(msg_records) > 0:

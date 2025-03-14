@@ -15,7 +15,6 @@ class Dictionary(Mapper):
         try:
             async with async_session() as session:
                 async with session.begin():
-                    logger.info(data)
                     for enums in data.enum:
                         result = await session.execute(
                             select(DictionaryModel).where(DictionaryModel.dict_code == data.dict_code,
@@ -30,23 +29,28 @@ class Dictionary(Mapper):
             cls.__log__.error(f"新增字典枚举失败, {e}")
             raise Exception(f"新增字典枚举失败, {e}")
 
-    @classmethod
-    async def dictionary_list(cls, dict_code: int):
-        try:
-            search = [DictionaryModel.deleted_at == 0]
-            async with async_session() as session:
-                if dict_code:
-                    search.append(DictionaryModel.dict_code == dict_code)
-                query = await session.execute(
-                    select(DictionaryModel.enum_id, DictionaryModel.enum_name).where(*search)
-                )
-                total = query.raw.rowcount
-                result = query.all()
-                cls.__log__.info(f"查询字典枚举成功, {str(result)}")
-                return result, total
-        except Exception as e:
-            cls.__log__.error(f"查询字典枚举失败, {str(e)}")
-            raise Exception(f"查询字典枚举失败, {e}")
+    # @classmethod
+    # async def dictionary_list(cls, dict_code: int, enum_id:None):
+    #     try:
+    #         search = [DictionaryModel.deleted_at == 0]
+    #         async with async_session() as session:
+    #             if dict_code:
+    #                 search.append(DictionaryModel.dict_code == dict_code)
+    #             if enum_id is not None:
+    #                 search.append(DictionaryModel.enum_id == enum_id)
+    #             query = await session.execute(
+    #                 select(DictionaryModel.enum_id, DictionaryModel.enum_name).where(*search)
+    #             )
+    #             total = query.raw.rowcount
+    #             if total == 1:
+    #                 result = query.all()[0][ DictionaryModel.enum_name ]
+    #             else:
+    #                 result = query.all()
+    #             cls.__log__.info(f"查询字典枚举成功, {str(result)}")
+    #             return result, total
+    #     except Exception as e:
+    #         cls.__log__.error(f"查询字典枚举失败, {str(e)}")
+    #         raise Exception(f"查询字典枚举失败, {e}")
 
     @classmethod
     async def delete_dictionary(cls, data: DictionaryForm):
@@ -68,3 +72,4 @@ class Dictionary(Mapper):
         except Exception as e:
             cls.__log__.error(f"删除字典枚举失败, {str(e)}")
             raise Exception(f"删除字典枚举失败, {e}")
+

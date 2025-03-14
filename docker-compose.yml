@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
     command: >
-      sh -c "uvicorn main:qms --host 0.0.0.0 --port 7777 --reload --forwarded-allow-ips '*'"
+      sh -c "uvicorn main:qms --host 0.0.0.0 --port 7777 --reload --forwarded-allow-ips '*' --loop uvloop"
     ports:
       - "7777:7777"
     networks:

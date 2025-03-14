@@ -1,0 +1,156 @@
+2025-02-11 13:42:24.761 | DEBUG    | 文件: D:\code\person_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 45 | - 查询字典枚举成功, []
+2025-02-11 13:43:03.257 | DEBUG    | 文件: D:\code\person_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 45 | - 查询字典枚举成功, <sqlalchemy.engine.result.ChunkedIteratorResult object at 0x000002104FBD9DC0>
+2025-02-11 17:45:27.366 | DEBUG    | 文件: D:\code\zyc\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 47 | - 查询字典枚举成功, [(1, 'v1环境'), (2, '测试环境'), (3, '线上环境'), (1, '数字化中台'), (2, '灵犀会员'), (3, '企团险'), (4, '智慧驾驶'), (5, '其他')]
+2025-02-12 11:20:58.876 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 47 | - 查询字典枚举成功, [(1, 'v1环境')]
+2025-02-12 11:24:48.301 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, 1
+2025-02-12 11:25:05.463 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, 2
+2025-02-12 11:25:29.638 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, [(2, '测试环境')]
+2025-02-12 11:27:56.912 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, <sqlalchemy.engine.result.ScalarResult object at 0x0000019D451CC280>
+2025-02-12 11:28:19.391 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, [(2, '测试环境')]
+2025-02-12 11:28:47.666 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, (2, '测试环境')
+2025-02-12 11:29:24.307 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, (2, '测试环境')
+2025-02-12 11:29:47.266 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, 测试环境
+2025-02-12 11:29:59.356 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, 测试环境
+2025-02-12 13:44:17.202 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:45:36.655 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:45:53.279 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:46:17.019 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:46:46.067 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:47:07.841 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:52:17.448 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:54:55.202 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:55:50.163 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:56:12.301 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:56:48.405 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:58:13.441 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 13:58:58.571 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:33:23.002 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:37:22.332 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:41:01.413 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:41:23.233 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:42:02.252 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:42:50.612 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:43:09.987 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:43:32.720 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:44:20.653 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:44:45.624 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:45:59.741 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:46:15.357 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:58:10.711 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:58:41.410 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 15:58:42.108 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: delete_zip_file | 行数: 292 | - 已删除文件夹: media\upload\唐钰\张砚程c636a6c0-5631-4430-aec0-633a3d277f79
+2025-02-12 15:58:48.764 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\Dictionary.py | 模块: QmsBase | 方法: dictionary_list | 行数: 50 | - 查询字典枚举成功, v1环境
+2025-02-12 16:11:05.247 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: delete_zip_file | 行数: 293 | - 已删除文件夹: media\upload\唐钰\张砚程52b8779f-abde-4cb5-b3f8-299bd77b9903
+2025-02-12 17:33:44.547 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - 用户唐钰/张砚程, 新增导入钩稽数据记录失败, (raised as a result of Query-invoked autoflush; consider using a session.no_autoflush block if this flush is occurring prematurely)
+(pymysql.err.OperationalError) (1241, 'Operand should contain 1 column(s)')
+[SQL: INSERT INTO qms_audit_data (created_at, updated_at, deleted_at, create_user, update_user, tool_id, env, channel, url, execution_log, is_rollback) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: (datetime.datetime(2025, 2, 12, 17, 33, 44, 334786), datetime.datetime(2025, 2, 12, 17, 33, 44, 334786), 0, '唐钰/张砚程', '唐钰/张砚程', 1, 1, ('云获', 1), 'http://www.baidu.com', '{"first_inserted_id": 1347420, "last_inserted_id": 1350481, "count": 3062}', 0)]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+2025-02-13 14:25:43.853 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 93 | - 查询钩稽导入记录失败, Neither 'UnaryExpression' object nor 'Comparator' object has an attribute 'offset'
+2025-02-13 14:25:59.395 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 93 | - 查询钩稽导入记录失败, Neither 'UnaryExpression' object nor 'Comparator' object has an attribute 'offset'
+2025-02-13 16:02:49.386 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 94 | - 查询钩稽导入记录失败, (pymysql.err.OperationalError) (1066, "Not unique table/alias: 'dictionary'")
+[SQL: SELECT qms_audit_data.id, qms_audit_data.env, dictionary.enum_name AS env_desc, qms_audit_data.channel, dictionary.enum_name AS channel_desc, qms_audit_data.url, qms_audit_data.is_rollback, qms_audit_data.create_user, qms_audit_data.created_at 
+FROM qms_audit_data LEFT OUTER JOIN dictionary ON dictionary.dict_code = %s AND dictionary.enum_id = qms_audit_data.env LEFT OUTER JOIN dictionary ON dictionary.dict_code = %s AND dictionary.enum_id = qms_audit_data.channel 
+WHERE qms_audit_data.deleted_at = %s AND qms_audit_data.tool_id = %s AND qms_audit_data.create_user = %s AND qms_audit_data.env = %s ORDER BY qms_audit_data.created_at DESC]
+[parameters: (2025000, 2025002, 0, 1, '唐钰/张砚程', 1)]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+2025-02-13 16:06:04.814 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 98 | - 查询钩稽导入记录失败, Can't determine which FROM clause to join from, there are multiple FROMS which can join to this entity. Please use the .select_from() method to establish an explicit left side, as well as providing an explicit ON clause if not present already to help resolve the ambiguity.
+2025-02-18 19:05:17.226 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 48 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:05:38.814 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 48 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:05:44.103 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 48 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:05:53.373 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 48 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:16:32.355 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 48 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:22:39.508 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 45 | - None
+2025-02-18 19:22:47.680 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 45 | - 1
+2025-02-18 19:22:47.691 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 49 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-18 19:23:44.034 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 45 | - 1
+2025-02-19 11:15:22.543 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 51 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-19 11:16:05.948 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 51 | - 云获
+2025-02-19 11:19:19.151 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 51 | - [(1, 'v5环境'), (2, 'v1环境'), (3, 'test环境'), (4, '线上环境')]
+2025-02-19 11:20:42.333 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\ToolsInfo.py | 模块: QmsBase | 方法: tools_detail | 行数: 51 | - ['v5环境', 'v1环境', 'test环境', '线上环境']
+2025-02-20 10:28:42.525 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 106 | - 查询钩稽导入记录失败, unsupported operand type(s) for -: 'str' and 'int'
+2025-02-20 10:29:15.539 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 106 | - 查询钩稽导入记录失败, invalid literal for int() with base 10: ''
+2025-02-20 10:29:37.072 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 106 | - 查询钩稽导入记录失败, invalid literal for int() with base 10: ''
+2025-02-20 18:01:33.626 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:01:34.069 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:01:34.109 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:01:34.397 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:01:34.417 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:01:34.425 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:01:34.742 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:01:35.161 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:01:35.165 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:01:35.400 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:01:35.416 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:01:35.424 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:01:35.428 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
+2025-02-20 18:01:35.448 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
+2025-02-20 18:09:38.508 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:09:39.611 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:09:39.628 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:09:39.892 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:09:39.907 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:09:39.914 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:09:40.223 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:09:40.813 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:09:40.816 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:09:41.009 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:09:41.028 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:09:41.034 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:09:41.036 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
+2025-02-20 18:09:41.051 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
+2025-02-20 18:09:44.680 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:09:45.325 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:09:45.328 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:09:45.550 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:09:45.564 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:09:45.569 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:09:45.842 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:09:46.484 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:09:46.486 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:09:46.671 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:09:46.684 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:09:46.689 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:09:46.691 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
+2025-02-20 18:09:46.701 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
+2025-02-20 18:16:35.040 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:16:49.575 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:17:44.737 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:22:07.902 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:23:37.012 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:24:03.145 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:27:34.330 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:31:45.995 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:38:17.691 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:40:36.429 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:44:36.882 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:44:37.825 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:44:37.838 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:44:38.048 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:44:38.064 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:44:38.068 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:44:38.359 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 18:44:39.039 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 210 | - curd层：2222222222222222
+2025-02-20 18:44:39.041 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 215 | - curd层：33333333333333333
+2025-02-20 18:44:39.260 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 245 | - curd层：44444444444444444
+2025-02-20 18:44:39.277 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 249 | - curd层：5555555555555555555555
+2025-02-20 18:44:39.285 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 18:44:39.288 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
+2025-02-20 18:44:39.303 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
+2025-02-20 18:45:00.273 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 19:01:52.636 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 19:03:08.716 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 19:03:08.830 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 213 | - curd层：2222222222222222
+2025-02-20 19:03:08.844 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 218 | - curd层：33333333333333333
+2025-02-20 19:03:09.045 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 248 | - curd层：44444444444444444
+2025-02-20 19:03:09.067 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 252 | - curd层：5555555555555555555555
+2025-02-20 19:03:09.072 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 19:03:09.349 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 41 | - 路由层：1111111111111111111111
+2025-02-20 19:03:09.418 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 213 | - curd层：2222222222222222
+2025-02-20 19:03:09.423 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 218 | - curd层：33333333333333333
+2025-02-20 19:03:09.630 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 248 | - curd层：44444444444444444
+2025-02-20 19:03:09.646 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: QmsBase | 方法: insert_data_into_db | 行数: 252 | - curd层：5555555555555555555555
+2025-02-20 19:03:09.652 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\routers\others\autoDataImport.py | 模块: QmsBase | 方法: audit_import | 行数: 43 | - 路由层：22222222222222222222222222
+2025-02-20 19:03:09.654 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 42 | - curd层1：1111111111111111
+2025-02-20 19:03:09.666 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: insert_import_record | 行数: 54 | - curd层1：2222222222222222
+2025-02-20 21:47:19.388 | DEBUG    | 文件: D:\code\lx_git\toolsPlatform\app\crud\AuditDataImport.py | 模块: AuditDataImportModelDao | 方法: audit_import_list | 行数: 110 | - 查询钩稽导入记录失败, name 'pageNum' is not defined

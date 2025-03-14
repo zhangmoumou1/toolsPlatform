@@ -2,10 +2,12 @@ import os
 from datetime import datetime
 from decimal import Decimal
 from typing import Any
+from fastapi import Query
+from typing import Optional
 from starlette.background import BackgroundTask
 from starlette.responses import FileResponse
 from app.handler.encoder import jsonable_encoder
-
+from functools import wraps
 
 class QmsResponse(object):
     """
@@ -72,22 +74,22 @@ class QmsResponse(object):
         })
 
     @staticmethod
-    def success(data=None, code=0, msg="操作成功", exclude=()):
-        return QmsResponse.encode_json(dict(code=code, msg=msg, data=data), *exclude)
+    def success(data=None, code=10000, msg="Success", exclude=()):
+        return QmsResponse.encode_json(dict(code=code, msg=msg, data=data, suceess=True), *exclude)
 
     @staticmethod
-    def records(data: list, code=0, msg="操作成功"):
+    def records(data: list, code=10000, msg="Success"):
         return dict(code=code, msg=msg, data=QmsResponse.model_to_list(data))
 
     @staticmethod
-    def success_with_size(data=None, code=0, msg="操作成功", total=0):
+    def success_with_size(data=None, code=10000, msg="Success", total=0):
         if data is None:
             return QmsResponse.encode_json(dict(code=code, msg=msg, data=list(), total=0))
-        return QmsResponse.encode_json(dict(code=code, msg=msg, data=data, total=total))
+        return QmsResponse.encode_json(dict(code=code, msg=msg, data={"list": data, "total": total}, suceess=True))
 
     @staticmethod
-    def failed(msg, code=110, data=None):
-        return dict(code=code, msg=str(msg), data=data)
+    def failed(msg, code=99999, data=None):
+        return dict(code=code, msg=str(msg), data=data, suceess=False)
 
     @staticmethod
     def forbidden():
@@ -96,3 +98,14 @@ class QmsResponse(object):
     @staticmethod
     def file(filepath, filename):
         return FileResponse(filepath, filename=filename, background=BackgroundTask(lambda: os.remove(filepath)))
+
+
+# 自定义装饰器：处理空字符串，转换为 None
+def parse_type(value: Optional[str] = Query(None)) -> Optional[int]:
+    if value == "":
+        return None  # 为空字符串时返回 None
+    try:
+        return int(value)  # 尝试将值转换为 int
+    except (ValueError, TypeError):
+        return None  # 无法转换时返回 None
+

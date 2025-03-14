@@ -1,20 +1,25 @@
 import aiomysql
-from io import BytesIO
 import os
-import uuid
-from pathlib import Path
 import zipfile
 import shutil
 import json
+import uuid
+from pathlib import Path
+from pandas import read_excel
+from python_calamine.pandas import pandas_monkeypatch
+from io import BytesIO
 from fastapi import UploadFile
 from typing import Generator
 from sqlalchemy import text, select, update, desc
+from sqlalchemy.orm import aliased
 import pandas as pd
 from app.crud import ModelWrapper, Mapper
-from app.schema.audit_data_import import AuditDataRoolbackForm
+from app.schema.audit_data_import import AuditDataRoolbackForm, AuditDataImportForm, AuditDataRecordListForm
 from app.models import async_session, business_async_session
 from app.models.audit_data_model import AuditDataImportModel
 from app.models.tools_info_model import ToolsInfoModel
+from app.models.dictionary_model import DictionaryModel
+from app.crud import QueryDictionary, CheckDictionary, QueryDictionaryEnums
 from app import init_logging
 logger = init_logging()
 
@@ -24,8 +29,8 @@ TMP_ROOT = "media/tmp"
 @ModelWrapper(AuditDataImportModel)
 class AuditDataImport(Mapper):
 
-    @staticmethod
-    async def insert_import_record(user: str, tool_id: int, env: int, channel: str, aliyun_url: str, execution_log: str = None):
+    @classmethod
+    async def insert_import_record(cls, data: AuditDataImportForm, execution_log: str = None, execution_result:str = None):
         """
         钩稽数据导入
         :param user:
@@ -38,20 +43,31 @@ class AuditDataImport(Mapper):
         try:
             async with async_session() as session:
                 async with session.begin():
-                    record = AuditDataImportModel(user=user, tool_id=tool_id, env=env, channel=channel, url=aliyun_url,
-                                                  execution_log=execution_log, is_rollback=0)
+                    await CheckDictionary(dict_code=2025002, enum_id=data.channel)
+                    record = AuditDataImportModel(user=data.user, tool_id=data.tool_id, env=data.env, channel=data.channel, files=data.files,
+                                                  execution_log=execution_log, is_rollback=0, execution_result=execution_result)
                     session.add(record)
                     await session.execute(
                         update(ToolsInfoModel)
-                        .where((ToolsInfoModel.id == tool_id) & (ToolsInfoModel.deleted_at == 0))
+                        .where((ToolsInfoModel.id == data.tool_id) & (ToolsInfoModel.deleted_at == 0))
                         .values(total=ToolsInfoModel.total + 1)
                     )
         except Exception as e:
-            logger.error(f"用户{user}, 新增导入钩稽数据记录失败, {e}")
-            raise Exception(f"用户{user}, 新增导入钩稽数据记录失败, {e}")
+            # 如果执行了业务，但是记录保存出错，需要回滚
+            if execution_log:
+                env_enum_name = (await QueryDictionaryEnums(dict_code=2025000, enum_id=data.env))[0]['enums'][0]['enum_name']
+                async with business_async_session(env_enum_name, 'etl') as bs_session:
+                    execution_log = json.loads(execution_log)
+                    first_inserted_id = execution_log['first_inserted_id']
+                    last_inserted_id = execution_log['last_inserted_id']
+                    await bs_session.execute(text(
+                        f"delete from yunhuo_clea_data where id between {first_inserted_id} and {last_inserted_id}"))
+                    await bs_session.commit()
+            cls.__log__.error(f"新增导入钩稽数据记录失败, {e}")
+            raise Exception(f"新增导入钩稽数据记录失败, {e}")
 
-    @staticmethod
-    async def audit_import_list(tool_id: int, user: str, env: int):
+    @classmethod
+    async def audit_import_list(cls, data:AuditDataRecordListForm):
         """
         钩稽数据导入记录
         :param tool_id:
@@ -59,26 +75,41 @@ class AuditDataImport(Mapper):
         :return:
         """
         try:
-            search = [AuditDataImportModel.deleted_at == 0, AuditDataImportModel.tool_id == tool_id]
+            search = [AuditDataImportModel.deleted_at == 0, AuditDataImportModel.tool_id == data.param.tool_id]
             async with async_session() as session:
-                if user:
-                    search.append(AuditDataImportModel.create_user == user)
-                if env:
-                    search.append(AuditDataImportModel.env == env)
-                query = await session.execute(
-                    select(AuditDataImportModel.env, AuditDataImportModel.channel, AuditDataImportModel.url,
-                           AuditDataImportModel.is_rollback,AuditDataImportModel.create_user,
-                           AuditDataImportModel.created_at).where(*search).order_by(desc(AuditDataImportModel.created_at))
-                )
+                if data.param.user:
+                    search.append(AuditDataImportModel.create_user == data.param.user)
+                if data.param.env:
+                    search.append(AuditDataImportModel.env == data.param.env)
+                # 使用 aliased 创建字典表的两个别名
+                dict_env = aliased(DictionaryModel)
+                dict_channel = aliased(DictionaryModel)
+                sql = select(AuditDataImportModel.id, AuditDataImportModel.env, dict_env.enum_name.label("env_desc"),
+                            AuditDataImportModel.channel, dict_channel.enum_name.label("channel_desc"),
+                             AuditDataImportModel.files, AuditDataImportModel.is_rollback,
+                             AuditDataImportModel.create_user, AuditDataImportModel.created_at
+                        ).outerjoin(
+                            dict_env, ((dict_env.dict_code == 2025000) & (dict_env.enum_id == AuditDataImportModel.env))
+                        ).outerjoin(
+                            dict_channel, ((dict_channel.dict_code == 2025002) & (dict_channel.enum_id == AuditDataImportModel.channel))
+                        ).where(
+                            *search
+                        ).order_by(
+                            desc(AuditDataImportModel.created_at)
+                        )
+                query = await session.execute(sql)
                 total = query.raw.rowcount
-                result = query.all()
-                return result, total
+                if total == 0:
+                    return [], 0
+                sql = sql.offset((data.pageNum - 1) * data.pageSize).limit(data.pageSize)
+                data = await session.execute(sql)
+                return data.all(), total
         except Exception as e:
-            logger.error(f"查询钩稽导入记录失败, {e}")
+            cls.__log__.info(f"查询钩稽导入记录失败, {e}")
             raise Exception(f"查询钩稽导入记录失败, {e}")
 
-    @staticmethod
-    async def rollback_import_record(data: AuditDataRoolbackForm):
+    @classmethod
+    async def rollback_import_record(cls, data: AuditDataRoolbackForm):
         """
         导入记录回滚
         :param user:
@@ -92,18 +123,17 @@ class AuditDataImport(Mapper):
                     search = [AuditDataImportModel.deleted_at == 0, AuditDataImportModel.tool_id == data.tool_id,
                               AuditDataImportModel.id == data.record_id]
                     query = await session.execute(
-                        select(AuditDataImportModel.create_user, AuditDataImportModel.execution_log)
+                        select(AuditDataImportModel.create_user, AuditDataImportModel.execution_log, AuditDataImportModel.env)
                         .where(*search).order_by(desc(AuditDataImportModel.created_at)))
-                    db_user, db_log = query.first()
-                    logger.error(db_log)
+                    db_user, db_log, env = query.first()
                     if data.user != db_user:
                         return f"非当前记录用户，无法回滚！"
+            result = (await QueryDictionaryEnums(dict_code=2025000, enum_id=env))[0]['enums'][0]['enum_name']
             # 执行回滚数据
-            async with business_async_session('v1', 'etl') as bs_session:
+            async with business_async_session(result, 'etl') as bs_session:
                 execution_log = json.loads(db_log)
                 first_inserted_id = execution_log['first_inserted_id']
                 last_inserted_id = execution_log['last_inserted_id']
-                logger.warning(last_inserted_id)
                 await bs_session.execute(text(
                     f"delete from yunhuo_clea_data where id between {first_inserted_id} and {last_inserted_id}"))
                 await bs_session.commit()
@@ -111,18 +141,17 @@ class AuditDataImport(Mapper):
             async with async_session() as session:
                 async with session.begin():
                     search = [AuditDataImportModel.deleted_at == 0, AuditDataImportModel.tool_id == data.tool_id,
-                              AuditDataImportModel.id == data.record_id]
+                              AuditDataImportModel.id == data.record_id, AuditDataImportModel.create_user == data.user]
                     await session.execute(
                         update(AuditDataImportModel)
                         .where(*search)
                         .values(is_rollback=True)
                     )
         except Exception as e:
-            logger.error(f"用户{data.user}, 钩稽数据导入回滚失败, {e}")
-            raise Exception(f"用户{data.user}, 钩稽数据导入回滚失败, {e}")
+            cls.__log__.error(f"钩稽数据导入回滚失败, {e}")
+            raise Exception(f"钩稽数据导入回滚失败, {e}")
 
-
-class ExcelToMysql():
+class ExcelToMysql(Mapper):
     # @staticmethod
     # async def async_operations_from_df(df):
     #     """
@@ -142,44 +171,43 @@ class ExcelToMysql():
     #         logger.error(f"An error occurred during async operations: {e}")
     #         raise
 
-    @staticmethod
-    async def async_operations(excel_file):
+    @classmethod
+    async def async_operations(cls, excel_file, env):
         """
         pandas解析数据
         :param excel_file:
         :return:
         """
         try:
+            pandas_monkeypatch()
             # 读取Excel文件（同步部分）
             excel_io = BytesIO(excel_file)
             excel_io.seek(0)
-            df = pd.read_excel(excel_io)
+            df = pd.read_excel(excel_io, engine="calamine")
             df = df.where(pd.notnull(df), None)
             # 确保 df 是 DataFrame
             if not isinstance(df, pd.DataFrame):
-                logger.error(f"read_excel() returned unexpected type: {type(df)}")
+                cls.__log__.error(f"read_excel() returned unexpected type: {type(df)}")
                 raise ValueError("Excel file parsing failed, returned non-DataFrame object")
 
             # 检查 DataFrame 是否为空
             if df.empty:
-                logger.warning("Excel file parsed but DataFrame is empty!")
+                cls.__log__.warning("Excel file parsed but DataFrame is empty!")
             # 异步执行初始化连接池、插入数据和关闭连接池的操作
-            import time
-            now = time.time()
-            count = await ExcelToMysql.insert_data_into_db(df)
-            logger.error(f'22222---{time.time() - now}')
+            count = await ExcelToMysql.insert_data_into_db(df, env)
             return count
         except Exception as e:
-            logger.error(f"An error occurred during async operations: {e}")
+            cls.__log__.error(f"An error occurred during async operations: {e}")
             raise
 
-    @staticmethod
-    async def insert_data_into_db(df):
+    @classmethod
+    async def insert_data_into_db(cls, df, env):
         """
         数据导入云获表
         """
         try:
-            async with business_async_session('v1', 'etl') as conn:
+            data = (await QueryDictionaryEnums(dict_code=2025000, enum_id=env))[0]['enums'][0]['enum_name']
+            async with business_async_session(data, 'etl') as conn:
                 # 查询当前表的最大ID
                 result = await conn.execute(text("SELECT MAX(id) FROM yunhuo_clea_data"))
                 max_id_result = result.scalar()  # 获取最大ID
@@ -219,11 +247,11 @@ class ExcelToMysql():
                 last_inserted_id = max_id_result if max_id_result is not None else 1
 
         except aiomysql.Error as e:
-            print(f"Database error occurred: {e}")
+            cls.__log__.error(f"Database error occurred: {e}")
             if 'conn' in locals() and conn is not None:
                 await conn.rollback()
         except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            cls.__log__.error(f"An unexpected error occurred: {e}")
             if 'conn' in locals() and conn is not None:
                 await conn.rollback()
         finally:
@@ -280,8 +308,8 @@ class ExcelToMysql():
                 except OSError:
                     pass
 
-    @staticmethod
-    def delete_zip_file(extract_to):
+    @classmethod
+    def delete_zip_file(cls, extract_to):
         """
         删除zip解压文件夹
         :return:
@@ -290,10 +318,10 @@ class ExcelToMysql():
             extract_path = Path(extract_to)
             if extract_path.exists() and extract_path.is_dir():
                 shutil.rmtree(extract_path)
-                logger.info(f"已删除文件夹: {extract_path}")
+                cls.__log__.info(f"已删除文件夹: {extract_path}")
             else:
-                logger.warning(f"文件夹不存在: {extract_path}")
+                cls.__log__.warning(f"文件夹不存在: {extract_path}")
         except Exception as e:
-            logger.error(f"删除文件夹失败: {e}")
+            cls.__log__.error(f"删除文件夹失败: {e}")
             raise
 
